@@ -3,12 +3,21 @@ on:
   workflow_dispatch:
     inputs:
       environment: 
-        description: environment to deploy is dev
+        description: choode environment to deploy
         required: true
         default: dev
+        type: choice
+        options:
+          - dev
+          - test
+          - prod
+     artifact-tag:
+       description: choose git-artifact to deploy
+       reuired: true
+      
 jobs: 
   deploy_app:
     runs-on: ubuntu-latest
     steps:
       - name: deploy app at dev
-        run: echo " deply app at ${{inputs.environment}}"
+        run: echo " deply ${{inputs.artifact-tag}} app at ${{inputs.environment}}"
